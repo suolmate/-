@@ -1,0 +1,37 @@
+<!-- 轮播图 -->
+<swiper indicator-dots="{{shops.images.length > 1}}" indicator-color="#bcc0c9" indicator-active-color="#3a4861">
+  <swiper-item wx:for="{{ shops.images }}" wx:key="index" >
+    <image src="{{ item }}" bindtap="priview" data-url="{{ item }}"></image>
+  </swiper-item>
+</swiper>
+<!-- 商品信息 -->
+<view class="info">
+  <view class="name">{{ shops.name }}</view>
+  <view class="phone">电话：{{ shops.phone }}</view>
+  <view class="address">地址：{{ shops.address }}</view>
+  <view class="businessHours">营业时间：{{ shops.businessHours }}</view>
+</view>
+<!-- 评论 -->
+<view class="comment">
+  <view class="item" wx:for="{{ shops.comments }}" wx:key="index">
+    <view class="item_info">
+      <view class="name">{{ item.name }}</view>
+      <view class="time">
+        <view class="rating">{{ item.rating }}</view>
+        <view class="date">{{ item.date }}</view>
+      </view>
+    </view>
+    <view class="content">{{ item.content }}</view>
+    <view class="img">
+      <image wx:for="{{ item.images }}" wx:key="index" src="{{util.size(item)}}"></image>
+    </view>
+  </view>
+</view>
+<wxs module="util">
+  // 这里不支持一些新特性
+  module.exports = {
+    size: function (input) {
+      return input.replace('w.h', '100.100')
+    }
+  }
+</wxs>
